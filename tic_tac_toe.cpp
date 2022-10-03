@@ -2,10 +2,11 @@
 using namespace std;
 
 bool win_game_row(char arr[3][3]){
+	//Checks Horizontal Win
 	for(int i=0;i<3;i++){
 		bool res = true;
 		char same = arr[i][0];
-		if(same == '#'){
+		if(same == '-'){
 			continue; //This Row has empty spaces
 		}
 		for(int j=1;j<3;j++){
@@ -22,10 +23,11 @@ bool win_game_row(char arr[3][3]){
 }
 
 bool win_game_col(char arr[3][3]){
+	//Checks Vertical Win
 	for(int i=0;i<3;i++){
 		bool res = true;
 		char same = arr[0][i];
-		if(same == '#'){
+		if(same == '-'){
 			continue; //This Column has empty spaces
 		}
 		for(int j=1;j<3;j++){
@@ -42,8 +44,9 @@ bool win_game_col(char arr[3][3]){
 }
 
 bool win_game_diag1(char arr[3][3]){
+	//Checks Diagonal Win
 	char same = arr[0][0];
-	if(same == '#'){
+	if(same == '-'){
 		return false;
 	}
 	for(int i=1;i<3;i++){
@@ -55,8 +58,9 @@ bool win_game_diag1(char arr[3][3]){
 }
 
 bool win_game_diag2(char arr[3][3]){
+	//Checks Diagonal Win
 	char same = arr[0][2];
-	if(same == '#'){
+	if(same == '-'){
 		return false;
 	}
 	for(int i=1;i<3;i++){
@@ -68,15 +72,17 @@ bool win_game_diag2(char arr[3][3]){
 }
 
 void display(char arr[3][3]){
-	for(int i=0;i<3;i++){
-		for(int j=0;j<3;j++){
-			cout<<arr[i][j]<<" ";
-		}
-		cout<<endl;
-	}
+	//Displays the complete board
+	cout<<"\n";
+	cout<<arr[0][0]<<" | "<<arr[0][1]<<" | "<<arr[0][2]<<endl;
+	cout<<"---------\n";
+	cout<<arr[1][0]<<" | "<<arr[1][1]<<" | "<<arr[1][2]<<endl;
+	cout<<"---------\n";
+	cout<<arr[2][0]<<" | "<<arr[2][1]<<" | "<<arr[2][2]<<endl;
 }
 
 void change(char arr[3][3],int row,int col,int turn){
+	//Takes input from the user and changes the value at that position
 	if(turn == 0){
 		arr[row][col] = 'O';
 	}
@@ -86,30 +92,35 @@ void change(char arr[3][3],int row,int col,int turn){
 }
 
 bool filled(char arr[3][3],int row,int col){
+	//Check whether the given position is already occupied or not
 	return (arr[row][col] == 'X' || arr[row][col] == 'O');
 }
 
 int main(){
 	char arr[3][3];
-	fill_n(arr[0],3,'#');
-	fill_n(arr[1],3,'#');
-	fill_n(arr[2],3,'#');
+	fill_n(arr[0],3,'-');
+	fill_n(arr[1],3,'-');
+	fill_n(arr[2],3,'-');
 	int turn = 0;
+	string temp_turn = "a"; //Temporary variable to read input of turn from the user
+	//Creating this will enable us to read all the characters without any segmentation fault
 	
 	cout<<"Player-1 will play with \'X\' \n"; //turn = 1
 	cout<<"Player-2 will play with \'O\' \n"; //turn = 0
+	cout<<"\n";
 	while(true){
 		cout<<"Which Player will turn first (1 or 2): ";
-		cin>>turn;
-		if(turn == 1){
+		getline(cin,temp_turn);
+
+		if(temp_turn == "1"){
 			break;
 		}
-		else if(turn == 2){
+		else if(temp_turn == "2"){
 			turn = 0; //0 represents Player-2
 			break;
 		}
 		else{
-			cout<<"Wrong Input! Try Again"<<endl;
+			cout<<"Wrong Input! Try Again\n\n";
 		}
 	}
 	
@@ -120,8 +131,14 @@ int main(){
 			cin>>row;
 			cout<<"Enter a column number (1 or 2 or 3): ";
 			cin>>col;
-			if(filled(arr,row-1,col-1)){
-				cout<<"Place Already Filled! Try Again"<<endl;
+			if(row<=0 || row>=4){
+				cout<<"Invalid Row Number Input! Try Again\n";
+			}
+			else if(col<=0 || col>=4){
+				cout<<"Invalid Column Number Input! Try Again\n";
+			}
+			else if(filled(arr,row-1,col-1)){
+				cout<<"Place Already Filled! Try Again\n";
 			}
 			else{
 				break;
@@ -130,7 +147,7 @@ int main(){
 		change(arr,row-1,col-1,turn); //Passing Player Input to TIC-TAC-TOE Board
 		display(arr); //Displaying TIC-TAC-TOE Board
 		if(win_game_col(arr) || win_game_row(arr) || win_game_diag1(arr) || win_game_diag2(arr)){
-			cout<<(turn==0?"Player-2 has won!\n":"Player-1 has won!\n");
+			cout<<(turn==0?"Player-2 won the game!\n":"Player-1 won the game!\n");
 			break;
 		}
 		turn = (turn+1)%2;
