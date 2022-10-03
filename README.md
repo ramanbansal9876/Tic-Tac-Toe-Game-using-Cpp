@@ -1,4 +1,4 @@
-# Tic-Tac-Toe-Game-using-C++
+# Tic-Tac-Toe-Game-using-C++ (OOPS)
 Tic-tac-toe is a game in which two players take turns in drawing either an 'X' or an ' O' in one square of a grid consisting of nine squares. The winner is the first player to get three of the same symbols in a row or a column or a diagonal.
 
 ### OBJECTIVE:
@@ -19,5 +19,4 @@ A player can choose between two symbols with his opponent, usual game uses "X" a
 
 3.	A player marks any of the 3x3 squares with his mark ("X" or "O") and their aim is to create a straight line horizontally, vertically or diagonally with two intensions:<br/>
  a.	One of the players gets three of his/her marks in a row (vertically, horizontally, or diagonally) i.e. that player wins the game.<br/>
- b.	If no one can create a straight line with their own mark and all the positions on the board are occupied, then the game ends in a 
-    draw/tie.
+ b.	If no one can create a straight line with their own mark and all the positions on the board are occupied, then the game ends in a draw/tie.
