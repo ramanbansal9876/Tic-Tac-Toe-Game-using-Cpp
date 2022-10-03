@@ -1,2 +1,2 @@
-# Tic-Tac-Toe-Game-using-C-
-Simple tic tac toe game that supports the two-player option in C++ using for/while loops and if-else conditional statements
+# Tic-Tac-Toe-Game-using-C++
+Tic-tac-toe is a game in which two players take turns in drawing either an 'X' or an ' O' in one square of a grid consisting of nine squares. The winner is the first player to get three of the same symbols in a row or a column or a diagonal.
